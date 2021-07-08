@@ -12,7 +12,7 @@ app.post("/", async(req,res)=>{
    
      res.status(201).json(Site);
 })
-// @desc    UPDATE  ADMIN MAIL SETTINGS DATA BY ID 60d6d9f151f2374e57c234ad
+// @desc    UPDATE  ADMIN MAIL SETTINGS DATA BY ID 604a3fb97cc3a976a1f1a5f7
 // @route   PUT /api/site/mailsettings
 // @access  Admin
 app.put("/mailsettings", async (req, res) => {
