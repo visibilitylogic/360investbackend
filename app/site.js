@@ -3,28 +3,28 @@ const { cloudinary } = require("../utils/cloudinary");
 
 const express = require("express");
 const app = express();
-app.post("/", async(req,res)=>{
-  const site=new SiteSettings({
-    siteTitle:"Welcome"
-  })
-   
-     const Site= await site.save();
-   
-     res.status(201).json(Site);
-})
+app.post("/", async (req, res) => {
+  const site = new SiteSettings({
+    siteTitle: "Welcome",
+  });
+
+  const Site = await site.save();
+
+  res.status(201).json(Site);
+});
 // @desc    UPDATE  ADMIN MAIL SETTINGS DATA BY ID 604a3fb97cc3a976a1f1a5f7
 // @route   PUT /api/site/mailsettings
 // @access  Admin
 app.put("/mailsettings", async (req, res) => {
-  const siteset = await SiteSettings.findById("60d6d9f151f2374e57c234ad");
+  const siteset = await SiteSettings.findById("6051fe8435e8702a5a8a0957");
 
   if (siteset) {
     siteset.mailEngine = req.body.mailEngine;
-    siteset.SMTPServer=req.body.SMTPServer;
-    siteset.SMTPPort=req.body.SMTPPort;
-    siteset.SMTPMail=req.body.SMTPMail;
-    siteset.SMTPPassword=req.body.SMTPPassword;
-    siteset.EmailSenderName=req.body.EmailSenderName;
+    siteset.SMTPServer = req.body.SMTPServer;
+    siteset.SMTPPort = req.body.SMTPPort;
+    siteset.SMTPMail = req.body.SMTPMail;
+    siteset.SMTPPassword = req.body.SMTPPassword;
+    siteset.EmailSenderName = req.body.EmailSenderName;
     siteset.mailForm = req.body.mailForm;
     siteset.emailSendName = req.body.emailSendName;
     siteset.supportMail = req.body.supportMail;
@@ -44,11 +44,11 @@ app.put("/mailsettings", async (req, res) => {
   }
 });
 
-// @desc    SET SITE EMAIL TEMPLATES DATA BY ID 60d6d9f151f2374e57c234ad
+// @desc    SET SITE EMAIL TEMPLATES DATA BY ID 6051fe8435e8702a5a8a0957
 // @route   PUT /api/site/mailtemplates
 // @access  Admin
 app.put("/mailtemplates", async (req, res) => {
-  const siteset = await SiteSettings.findById("60d6d9f151f2374e57c234ad");
+  const siteset = await SiteSettings.findById("6051fe8435e8702a5a8a0957");
 
   if (siteset) {
     siteset.privacyPolicy = req.body.privacyPolicy;
@@ -74,22 +74,24 @@ app.put("/mailtemplates", async (req, res) => {
   }
 });
 
-// @desc    SET SITE GENERAL SETTINGS DATA BY ID 60d6d9f151f2374e57c234ad
+// @desc    SET SITE GENERAL SETTINGS DATA BY ID 6051fe8435e8702a5a8a0957
 // @route   PUT /api/site/generalsettings
 // @access  Admin
 app.put("/generalsettings", async (req, res) => {
-  const siteset = await SiteSettings.findById("60d6d9f151f2374e57c234ad");
+  const siteset = await SiteSettings.findById("6051fe8435e8702a5a8a0957");
 
   if (siteset) {
     const siteFav = await cloudinary.uploader.upload(req.body.siteFav);
     const siteLogo = await cloudinary.uploader.upload(req.body.siteLogo);
-    const   siteLogoWhite=await cloudinary.uploader.upload(req.body.siteLogoWhite);
-    siteset.siteFav = siteFav.secure_url
-    siteset.siteLogo = siteLogo.secure_url
+    const siteLogoWhite = await cloudinary.uploader.upload(
+      req.body.siteLogoWhite
+    );
+    siteset.siteFav = siteFav.secure_url;
+    siteset.siteLogo = siteLogo.secure_url;
     siteset.siteTitle = req.body.siteTitle;
     siteset.siteLogoWhite = siteLogoWhite.secure_url;
-    siteset. privacyPolicyLink= req.body.privacyPolicyLink;
-    siteset.termsOfServicesLink=req.body.termsOfServicesLink;
+    siteset.privacyPolicyLink = req.body.privacyPolicyLink;
+    siteset.termsOfServicesLink = req.body.termsOfServicesLink;
     siteset.useWhiteLogo = req.body.useWhiteLogo;
     siteset.appDescription = req.body.appDescription;
     siteset.maintenanceMode = req.body.maintenanceMode;
@@ -105,9 +107,9 @@ app.put("/generalsettings", async (req, res) => {
     siteset.enableAutoLanguage = req.body.enableAutoLanguage;
     siteset.enablePOEEditorLanguage = req.body.enablePOEEditorLanguage;
     siteset.donationAddress = req.body.donationAddress;
-    siteset.donationText=req.body.donationText;
-    siteset.startWatchUserSignUp=req.body.startWatchUserSignUp;
-    siteset.startWatchNewUserSignUp=req.body.startWatchNewUserSignUp;
+    siteset.donationText = req.body.donationText;
+    siteset.startWatchUserSignUp = req.body.startWatchUserSignUp;
+    siteset.startWatchNewUserSignUp = req.body.startWatchNewUserSignUp;
     siteset.blacklistedCountries = req.body.blacklistedCountries;
     siteset.cookiePopupText = req.body.cookiePopupText;
     siteset.cookiePopupTitle = req.body.cookiePopupTitle;
@@ -118,7 +120,7 @@ app.put("/generalsettings", async (req, res) => {
     siteset.POEditorLanguage = req.body.POEditorLanguage;
     siteset.siteLanguage = req.body.siteLanguage;
     siteset.siteStartingCurrencyPair = req.body.siteStartingCurrencyPair;
-    
+
     await siteset.save();
 
     res.json(siteset);
@@ -128,7 +130,7 @@ app.put("/generalsettings", async (req, res) => {
   }
 });
 
-// @desc    SET SITE LOGIN LAYOUT DATA BY ID 60d6d9f151f2374e57c234ad
+// @desc    SET SITE LOGIN LAYOUT DATA BY ID 6051fe8435e8702a5a8a0957
 // @route   PUT /api/site/loginlayout
 // @access  Admin
 app.put("/loginlayout", async (req, res) => {
@@ -136,16 +138,18 @@ app.put("/loginlayout", async (req, res) => {
     loginCarouselImage1,
     loginCarouselImage2,
     loginCarouselImage3,
-    loginBackgroundImage
+    loginBackgroundImage,
   } = req.body;
-  const siteset = await SiteSettings.findById("60d6d9f151f2374e57c234ad");
+  const siteset = await SiteSettings.findById("6051fe8435e8702a5a8a0957");
   const Image1 = await cloudinary.uploader.upload(loginCarouselImage1);
   const Image2 = await cloudinary.uploader.upload(loginCarouselImage2);
   const Image3 = await cloudinary.uploader.upload(loginCarouselImage3);
-  const LoginBackground= await cloudinary.uploader.upload(loginBackgroundImage);
-  
+  const LoginBackground = await cloudinary.uploader.upload(
+    loginBackgroundImage
+  );
+
   if (siteset) {
-    siteset.loginBackgroundImage=LoginBackground.secure_url
+    siteset.loginBackgroundImage = LoginBackground.secure_url;
     siteset.loginCarouselImage1 = Image1.secure_url;
     siteset.loginCarouselImage2 = Image2.secure_url;
     siteset.loginCarouselImage3 = Image3.secure_url;
@@ -157,11 +161,11 @@ app.put("/loginlayout", async (req, res) => {
   }
 });
 
-// @desc    SET SITE LOGIN/SIGNUP APPEARANCE BY ID 60d6d9f151f2374e57c234ad
+// @desc    SET SITE LOGIN/SIGNUP APPEARANCE BY ID 6051fe8435e8702a5a8a0957
 // @route   PUT /api/site/Appearance
 // @access  Admin
 app.put("/loginAppearance", async (req, res) => {
-  const siteset = await SiteSettings.findById("60d6d9f151f2374e57c234ad");
+  const siteset = await SiteSettings.findById("6051fe8435e8702a5a8a0957");
 
   if (siteset) {
     siteset.allowsignup = req.body.allowsignup;
@@ -175,7 +179,7 @@ app.put("/loginAppearance", async (req, res) => {
     siteset.googleAppID = req.body.googleAppID;
     siteset.googleAppSecret = req.body.googleAppSecret;
     siteset.authorizationRedirectUrl = req.body.authorizationRedirectUrl;
-    siteset.signInFacebook= req.body.signInFacebook;
+    siteset.signInFacebook = req.body.signInFacebook;
     siteset.facebookAppId = req.body.facebookAppId;
     siteset.facebookAppSecret = req.body.facebookAppSecret;
     siteset.URIOauthValid = req.body.URIOauthValid;
@@ -188,11 +192,11 @@ app.put("/loginAppearance", async (req, res) => {
   }
 });
 
-// @desc    SITE LOGIN GENERAL APPEARANCE SETTINGS BY ID 60d6d9f151f2374e57c234ad
+// @desc    SITE LOGIN GENERAL APPEARANCE SETTINGS BY ID 6051fe8435e8702a5a8a0957
 // @route   PUT /api/site/generalappearance
 // @access  Admin
 app.put("/generalappearance", async (req, res) => {
-  const siteset = await SiteSettings.findById("60d6d9f151f2374e57c234ad");
+  const siteset = await SiteSettings.findById("6051fe8435e8702a5a8a0957");
 
   if (siteset) {
     siteset.yourMainColor = req.body.yourMainColor;
@@ -212,11 +216,11 @@ app.put("/generalappearance", async (req, res) => {
   }
 });
 
-// @desc    SITE IDENTITY SETTINGS BY ID 60d6d9f151f2374e57c234ad
+// @desc    SITE IDENTITY SETTINGS BY ID 6051fe8435e8702a5a8a0957
 // @route   PUT /api/site/siteidentitysettings
 // @access  Admin
 app.put("/siteidentitysettings", async (req, res) => {
-  const siteset = await SiteSettings.findById("60d6d9f151f2374e57c234ad");
+  const siteset = await SiteSettings.findById("6051fe8435e8702a5a8a0957");
 
   if (siteset) {
     siteset.enableIdentitySystem = req.body.enableIdentitySystem;
@@ -236,7 +240,7 @@ app.put("/siteidentitysettings", async (req, res) => {
     siteset.webCamDocumentRatio = req.body.webCamDocumentRatio;
     siteset.identityDocumentName = req.body.identityDocumentName;
     siteset.documentIdentityList = req.body.documentIdentityList;
-    siteset.newIdentityWizardAdvert=req.body.newIdentityWizardAdvert
+    siteset.newIdentityWizardAdvert = req.body.newIdentityWizardAdvert;
 
     await siteset.save();
 
@@ -247,25 +251,25 @@ app.put("/siteidentitysettings", async (req, res) => {
   }
 });
 
-// @desc    SITE PAYMENT SETTINGS BY ID 60d6d9f151f2374e57c234ad
+// @desc    SITE PAYMENT SETTINGS BY ID 6051fe8435e8702a5a8a0957
 // @route   PUT /api/site/paymentsettings
 // @access  Admin
 app.put("/paymentsettings", async (req, res) => {
-  const siteset = await SiteSettings.findById("60d6d9f151f2374e57c234ad");
+  const siteset = await SiteSettings.findById("6051fe8435e8702a5a8a0957");
 
   if (siteset) {
     siteset.paymentSuccessText = req.body.paymentSuccessText;
     siteset.paymentRefPattern = req.body.paymentRefPattern;
     siteset.paymentNeedsApproval = req.body.paymentNeedsApproval;
-    siteset.masterCardStatus= req.body.masterCardStatus;
-    siteset.bitCoinStatus= req.body.bitCoinStatus;
-    siteset.btcHeaderText=req.body.btcHeaderText;
-    siteset.btcAddress=req.body.btcAddress;
-    siteset.buyBTCLink=req.body.buyBTCLink
-    siteset.minWithdrawalAmount=parseInt(req.body.minWithdrawalAmount);
-    siteset.maxWithdrawalAmount=parseInt(req.body.maxWithdrawalAmount);
-    siteset.minDepositAmount=parseInt(req.body.minDepositAmount);
-    siteset.maxDepositAmount=parseInt(req.body.maxDepositAmount);
+    siteset.masterCardStatus = req.body.masterCardStatus;
+    siteset.bitCoinStatus = req.body.bitCoinStatus;
+    siteset.btcHeaderText = req.body.btcHeaderText;
+    siteset.btcAddress = req.body.btcAddress;
+    siteset.buyBTCLink = req.body.buyBTCLink;
+    siteset.minWithdrawalAmount = parseInt(req.body.minWithdrawalAmount);
+    siteset.maxWithdrawalAmount = parseInt(req.body.maxWithdrawalAmount);
+    siteset.minDepositAmount = parseInt(req.body.minDepositAmount);
+    siteset.maxDepositAmount = parseInt(req.body.maxDepositAmount);
 
     await siteset.save();
 
@@ -275,11 +279,11 @@ app.put("/paymentsettings", async (req, res) => {
     throw new Error("Site can not be updated");
   }
 });
-// @desc    SITE PAYMENT METHODS SETTINGS BY ID 60d6d9f151f2374e57c234ad
+// @desc    SITE PAYMENT METHODS SETTINGS BY ID 6051fe8435e8702a5a8a0957
 // @route   PUT /api/site/paymentmethodsettings
 // @access  Admin
 app.put("/paymentmethodsettings", async (req, res) => {
-  const siteset = await SiteSettings.findById("60d6d9f151f2374e57c234ad");
+  const siteset = await SiteSettings.findById("6051fe8435e8702a5a8a0957");
 
   if (siteset) {
     siteset.paymentMethods[0] = {
@@ -303,11 +307,11 @@ app.put("/paymentmethodsettings", async (req, res) => {
     throw new Error("Problems updating payment mehods");
   }
 });
-// @desc   GET SITE PAYMENT METHODS SETTINGS BY ID 60d6d9f151f2374e57c234ad
+// @desc   GET SITE PAYMENT METHODS SETTINGS BY ID 6051fe8435e8702a5a8a0957
 // @route   PUT /api/site/paymentmethods
 // @access  Public
 app.get("/paymentmethods", async (req, res) => {
-  const setsite = await SiteSettings.findById("60d6d9f151f2374e57c234ad");
+  const setsite = await SiteSettings.findById("6051fe8435e8702a5a8a0957");
   // 6055eaca8391fb0015ee5cf8
   if (SiteSettings) {
     res.status(200).json(setsite.paymentMethods[0]);
@@ -317,12 +321,11 @@ app.get("/paymentmethods", async (req, res) => {
   }
 });
 
-
-// @desc    GET SITE DATA BY ID 60d6d9f151f2374e57c234ad
+// @desc    GET SITE DATA BY ID 6051fe8435e8702a5a8a0957
 // @route   GET /api/site
 // @access  Admin
 app.get("/", async (req, res) => {
-  const setsite = await SiteSettings.findById("60d6d9f151f2374e57c234ad");
+  const setsite = await SiteSettings.findById("6051fe8435e8702a5a8a0957");
 
   if (SiteSettings) {
     res.status(200).json(setsite);
@@ -332,23 +335,36 @@ app.get("/", async (req, res) => {
   }
 });
 
-
-// @desc    SITE PAYMENT SETTINGS BY ID 60d6d9f151f2374e57c234ad
+// @desc    SITE PAYMENT SETTINGS BY ID 6051fe8435e8702a5a8a0957
 // @route   PUT /api/site/btcAdminSettings
 // @access  Admin
 app.put("/btcAdminSettings", async (req, res) => {
-  const siteset = await SiteSettings.findById("60d6d9f151f2374e57c234ad");
-  const BTCQRCodeImg= await cloudinary.uploader.upload(req.body.BTCQRCodeImg);
+  const siteset = await SiteSettings.findById("6051fe8435e8702a5a8a0957");
+  const BTCQRCodeImg = await cloudinary.uploader.upload(req.body.BTCQRCodeImg);
+  const depositeImg1 = await cloudinary.uploader.upload(req.body.depositeImg1);
+  const depositeImg2 = await cloudinary.uploader.upload(req.body.depositeImg2);
+  const depositeImg3 = await cloudinary.uploader.upload(req.body.depositeImg3);
 
   if (siteset) {
-    siteset.bitCoinStatus=req.body.bitCoinStatus;
-    siteset.btcHeaderText=req.body.btcHeaderText;
-    siteset.btcAddress=req.body.btcAddress;
-    siteset.buyBTCLink=req.body.buyBTCLink;
+    siteset.paymentSuccessText = req.body.paymentSuccessText;
+    siteset.paymentRefPattern = req.body.paymentRefPattern;
+    siteset.paymentNeedsApproval = req.body.paymentNeedsApproval;
+    siteset.masterCardStatus = req.body.masterCardStatus;
+    siteset.bitCoinStatus = req.body.bitCoinStatus;
+    siteset.btcHeaderText = req.body.btcHeaderText;
+    siteset.btcAddress = req.body.btcAddress;
+    siteset.buyBTCLink = req.body.buyBTCLink;
     siteset.BTCAmount1 = req.body.BTCAmount1;
     siteset.BTCAmount2 = req.body.BTCAmount2;
     siteset.BTCAmount3 = req.body.BTCAmount3;
-    siteset.BTCQRCodeImg=BTCQRCodeImg.secure_url
+    siteset.depositeImg1 = depositeImg1.secure_url;
+    siteset.depositeImg2 = depositeImg2.secure_url;
+    siteset.depositeImg3 = depositeImg3.secure_url;
+    siteset.BTCQRCodeImg = BTCQRCodeImg.secure_url;
+    siteset.depositeImg1Link = req.body.depositeImg1Link;
+    siteset.depositeImg2Link = req.body.depositeImg2Link;
+    siteset.depositeImg3Link = req.body.depositeImg3Link;
+
     await siteset.save();
 
     res.json(siteset);
@@ -358,14 +374,13 @@ app.put("/btcAdminSettings", async (req, res) => {
   }
 });
 
-
-// @desc    SITE LIVETRADE SETTINGS BY ID 60d6d9f151f2374e57c234ad
+// @desc    SITE LIVETRADE SETTINGS BY ID 6051fe8435e8702a5a8a0957
 // @route   PATCH /api/site/liveTrade
 // @access  Admin
 app.patch("/liveTrade", async (req, res) => {
-  const siteset = await SiteSettings.findById("60d6d9f151f2374e57c234ad");
+  const siteset = await SiteSettings.findById("6051fe8435e8702a5a8a0957");
   if (siteset) {
-    siteset.liveTrade=req.body.liveTrade;
+    siteset.liveTrade = req.body.liveTrade;
     await siteset.save();
 
     res.json(siteset);
@@ -374,11 +389,11 @@ app.patch("/liveTrade", async (req, res) => {
   }
 });
 
-// @desc    SITE LIVETRADE SETTINGS BY ID 60d6d9f151f2374e57c234ad
+// @desc    SITE LIVETRADE SETTINGS BY ID 6051fe8435e8702a5a8a0957
 // @route   GET/api/site/liveTrade
 // @access  Admin
 app.get("/liveTrade", async (req, res) => {
-  const siteset = await SiteSettings.findById("60d6d9f151f2374e57c234ad");
+  const siteset = await SiteSettings.findById("6051fe8435e8702a5a8a0957");
   if (siteset) {
     res.json(siteset.liveTrade);
   } else {
@@ -386,22 +401,22 @@ app.get("/liveTrade", async (req, res) => {
   }
 });
 
-// @desc    SITE DEPOSITE iMAGES SETTINGS BY ID 60d6d9f151f2374e57c234ad
+// @desc    SITE DEPOSITE iMAGES SETTINGS BY ID 6051fe8435e8702a5a8a0957
 // @route   PUT /api/site/depositImages
 // @access  Admin
 app.put("/depositImages", async (req, res) => {
-  const siteset = await SiteSettings.findById("60d6d9f151f2374e57c234ad");
-  const depositeImg1= await cloudinary.uploader.upload(req.body.depositeImg1);
-  const depositeImg2= await cloudinary.uploader.upload(req.body.depositeImg2);
-  const depositeImg3= await cloudinary.uploader.upload(req.body.depositeImg3);
+  const siteset = await SiteSettings.findById("6051fe8435e8702a5a8a0957");
+  const depositeImg1 = await cloudinary.uploader.upload(req.body.depositeImg1);
+  const depositeImg2 = await cloudinary.uploader.upload(req.body.depositeImg2);
+  const depositeImg3 = await cloudinary.uploader.upload(req.body.depositeImg3);
 
   if (siteset) {
-    siteset.depositeImg1=depositeImg1.secure_url;
-    siteset.depositeImg2=depositeImg2.secure_url;
-    siteset.depositeImg3=depositeImg3.secure_url;
-    siteset.depositeImg1Link=req.body.depositeImg1Link;
-    siteset.depositeImg2Link=req.body.depositeImg2Link;
-    siteset.depositeImg3Link=req.body.depositeImg3Link;
+    siteset.depositeImg1 = depositeImg1.secure_url;
+    siteset.depositeImg2 = depositeImg2.secure_url;
+    siteset.depositeImg3 = depositeImg3.secure_url;
+    siteset.depositeImg1Link = req.body.depositeImg1Link;
+    siteset.depositeImg2Link = req.body.depositeImg2Link;
+    siteset.depositeImg3Link = req.body.depositeImg3Link;
     await siteset.save();
 
     res.json(siteset);
@@ -410,9 +425,8 @@ app.put("/depositImages", async (req, res) => {
   }
 });
 
-
 // app.put("/depositMinMax", async (req, res) => {
-//   const siteset = await SiteSettings.findById("60d6d9f151f2374e57c234ad");
+//   const siteset = await SiteSettings.findById("6051fe8435e8702a5a8a0957");
 //   if (siteset) {
 
 //     await siteset.save();
@@ -422,12 +436,10 @@ app.put("/depositImages", async (req, res) => {
 //   }
 // });
 
-
-
 // app.put("/withdrawalMinMax", async (req, res) => {
-//   const siteset = await SiteSettings.findById("60d6d9f151f2374e57c234ad");
+//   const siteset = await SiteSettings.findById("6051fe8435e8702a5a8a0957");
 //   if (siteset) {
-   
+
 //     await siteset.save();
 //     res.json(siteset);
 //   } else {
@@ -435,3 +447,4 @@ app.put("/depositImages", async (req, res) => {
 //   }
 // });
 module.exports = app;
+ 
