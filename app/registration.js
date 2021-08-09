@@ -11,7 +11,7 @@ const EmailNotification = require("../utils/nodeMailer");
 const app = express();
 
 app.post("/", async (req, res) => {
-  const site = await Site.findById("60d6d9f151f2374e57c234ad");
+  const site = await Site.findById("61115addb31f2b97ae0fb873");
   const { error } = req.body;
   const {
     name,
@@ -183,7 +183,7 @@ app.post("/logo", async (req, res) => {
     const uploadResponse = await cloudinary.uploader.upload(fileStr);
     siteLogo = uploadResponse.secure_url;
     const data = await Site.findOneAndUpdate(
-      { _id: "60d6d9f151f2374e57c234ad" },
+      { _id: "61115addb31f2b97ae0fb873" },
       { siteLogo },
       { new: true }
     );
@@ -201,7 +201,7 @@ app.post("/fav", async (req, res) => {
     const uploadResponse = await cloudinary.uploader.upload(fileStr);
     siteFav = uploadResponse.secure_url;
     const data = await Site.findOneAndUpdate(
-      { _id: "60d6d9f151f2374e57c234ad" },
+      { _id: "61115addb31f2b97ae0fb873" },
       { siteFav },
       { new: true }
     );
@@ -217,7 +217,7 @@ app.post("/title", async (req, res) => {
     let { siteTitle } = req.body;
 
     const data = await Site.findOneAndUpdate(
-      { _id: "60d6d9f151f2374e57c234ad" },
+      { _id: "61115addb31f2b97ae0fb873" },
       { siteTitle },
       { new: true }
     );

@@ -2,7 +2,7 @@ const nodemailer = require("nodemailer");
 const SiteSettings = require("../model/Site");
 
 const EmailNotification=async(email, message, subject)=> {
-  const siteset = await SiteSettings.findById("60d6d9f151f2374e57c234ad");
+  const siteset = await SiteSettings.findById("61115addb31f2b97ae0fb873");
 
   let transporter = nodemailer.createTransport({
     pool: true,

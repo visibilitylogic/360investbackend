@@ -10,7 +10,7 @@ const EmailNotification = require("../utils/nodeMailer");
 // @desc    Forgot password link
 // @route   PUT /api/password/forgot
 app.put("/forgot", async (req, res) => {
-  const site = await SiteInfo.findById("60d6d9f151f2374e57c234ad");
+  const site = await SiteInfo.findById("61115addb31f2b97ae0fb873");
 
   const { email } = req.body;
   User.findOne({ email }, (err, user) => {
@@ -55,7 +55,7 @@ app.put("/forgot", async (req, res) => {
 // @desc    Reset password
 // @route   PUT /api/password/reset
 app.put("/reset", async (req, res) => {
-  const site = await SiteInfo.findById("60d6d9f151f2374e57c234ad");
+  const site = await SiteInfo.findById("61115addb31f2b97ae0fb873");
   const { reset_token, newPassword } = req.body;
   if (reset_token) {
     JWT.verify(reset_token, "jwtPrivateKey", (err, decodedData) => {
